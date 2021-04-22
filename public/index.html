@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bully Algorymth</title>
+    <script src='./js/vue.js'></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+
+    <!--
+    <script src='./js/axios.min.js'></script>
+    <script src='./js/socket.io.js'></script>
+        -->
+</head>
+
+<body style="background-color: #7c01f0;">
+    <div id="app">
+        <div class="pt-4 pb-3" style="background-color: #7c01f0;">
+            <div class="container">
+                <div class="d-block float-center text-center">
+                    <h1 class="mt-2" style="font-size: 50px; color: #ffffff; font-family: 'Calibri', sans-serif;">Algoritmo Bully</h1>
+                </div>
+                <div class="mb-2">
+                    <button class="bg-dark hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" v-on:click="add()">Nueva instancia</button>
+                </div>
+            </div>
+        </div>
+        <div class="pt-3 pb-3" style="background-color: #5e7bdd;">
+            <div class="container">
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table table-secondary table-striped table-bordered">
+                        <thead class="bg-ligth ">
+                            <tr>
+                                <th scope="col" class="text-center">¿Lider?</th>
+                                <th scope="col" class="text-center">ID Servidor</th>
+                                <th scope="col" class="text-center">Estado</th>
+                                <th scope="col" class="text-center">Apagar</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr v-for="item in rowData">
+                                <td>
+                                    <div class="mb-2" v-if="item.isLeader">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-award" viewBox="0 0 16 16">
+                                            <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193.684 1.365 1.086 1.072L12.387 6l.248 1.506-1.086 1.072-.684 1.365-1.51.229L8 10.874l-1.355-.702-1.51-.229-.684-1.365-1.086-1.072L3.614 6l-.25-1.506 1.087-1.072.684-1.365 1.51-.229L8 1.126l1.356.702 1.509.229z"/>
+                                            <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
+                                          </svg>
+                                    </div>
+                                    <div class="mb-2" v-if="!item.isLeader">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                            <circle cx="8" cy="8" r="8"/>
+                                          </svg>
+                                    </div>
+                                </td>
+                                <td>{{item.id}}</td>
+                                <td>{{(item.alive)?"Activo":"Inactivo"}}</td>
+                                <td>
+                                    <div class="mb-2" v-if="item.isLeader">
+                                        <button class="bg-dark hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" v-on:click="stop()">Detener</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="pt-4 pb-4" style="background-color: #5e7bdd;">
+            <div class="container">
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table table-secondary table-striped table-bordered">
+                        <thead class="bg-ligth ">
+                            <tr>
+                                <th scope="col" class="text-center">Tiempo</th>
+                                <th scope="col" class="text-center">Acción</th>
+                                <th scope="col" class="text-center">Servidor</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr v-for="item in rowMonitoring">
+                                <td>{{item.time}}</td>
+                                <td>{{item.action}}</td>
+                                <td>{{item.server}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src='client.js'></script>
+</body>
+
+</html>

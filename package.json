@@ -19,7 +19,10 @@
   "homepage": "https://github.com/diegoguerreroborda/BullyCoordinator#readme",
   "dependencies": {
     "axios": "^0.21.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "shelljs": "^0.8.4"
+    "http": "0.0.1-security",
+    "shelljs": "^0.8.4",
+    "socket.io": "^4.0.1"
   }
 }
